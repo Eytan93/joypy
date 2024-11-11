@@ -348,22 +348,8 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
         kwargs["label"] = None
 
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
-        kdeline = ax.lines[0]
-        mean = x_range.mean()
-        median = np.median(x_range)
-        std = x_range.std()
-        left = mean-std
-        right = mean+std
-        xs = kdeline.get_xdata()
-        ys = kdeline.get_ydata()
-        height = np.interp(mean, xs, ys)
-        height2 = np.interp(median, xs, ys)
-        height3 = np.interp(left, xs, ys)
-        height4 = np.interp(right, xs, ys)
-        ax.vlines(mean, 0, height, color='k',ls=':')
-        ax.vlines(median, 0, height2, color='k', ls='--')
-        ax.vlines(left, 0, height3, color='k',ls='-.')
-        ax.vlines(right, 0, height4, color='k',ls='-.')
+    kdeline = ax.lines[0]
+    print(kdeline)    
 
 ###########################################
 
