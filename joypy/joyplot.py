@@ -359,8 +359,8 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     
     ax.axvline(x=mean, ymin=0, ymax=kde.evaluate(mean), color='k',ls=':')
     ax.axvline(x=median, ymin=0, ymax=kde.evaluate(median), color='k', ls='--')
-    ax.axvline(x=(mean+std), ymin=0, ymax=kde.evaluate(mean+std)), color='k',ls='-.')
-    ax.axvline(x=(mean-std), ymin=0, ymax=kde.evaluate(mean-std)), color='k',ls='-.')
+    ax.axvline(x=(mean+std), ymin=0, ymax=kde.evaluate((mean+std)), color='k',ls='-.')
+    ax.axvline(x=(mean-std), ymin=0, ymax=kde.evaluate((mean-std)), color='k',ls='-.')
     #height = np.interp(mean, xs, ys)
     #ax.vlines(mean, 0, height, color='crimson', ls=':')
     #ax.vlines(np.mean(v), 0, np.interp(np.mean(v), v, y), color='k',ls=':')
