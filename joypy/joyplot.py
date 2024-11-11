@@ -338,7 +338,10 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
         kw = kwargs
         kw["label"] = None
         ax.plot(x_range, [0.0]*len(x_range), clip_on=clip_on, **kw)
-       
+        ax.vlines(x_range.mean(), 0, np.interp(x_range.mean(), x_range, y), color='k',ls=':')
+        ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), x_range, y), color='k', ls='--')
+        ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), x_range, y), color='k',ls='-.')
+        ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), x_range, y), color='k',ls='-.')
     if linecolor is not None:
         kwargs["color"] = linecolor
 
@@ -348,10 +351,7 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
         kwargs["label"] = None
 
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
-    ax.vlines(x_range.mean(), 0, np.interp(x_range.mean(), x_range, y), color='k',ls=':')
-    ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), x_range, y), color='k', ls='--')
-    ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), x_range, y), color='k',ls='-.')
-    ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), x_range, y), color='k',ls='-.')
+    
 ###########################################
 
 def _joyplot(data,
