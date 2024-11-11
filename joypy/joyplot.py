@@ -353,7 +353,7 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     median = np.median(v)
     std = np.std(v)
     ax.vlines(mean, 0.0, np.interp(mean, x_range, y), color='k',ls=':')
-    ax.vlines(median, 0.0, np.interp(mean, x_range, y), color='k', ls='--')
+    ax.vlines(median, 0.0, np.interp(median, x_range, y), color='k', ls='--')
     ax.vlines((mean+std), 0.0, np.interp(mean+std, x_range, y), color='k',ls='-.')
     ax.vlines((mean-std), 0.0, np.interp(mean-std, x_range, y), color='k',ls='-.')
     
