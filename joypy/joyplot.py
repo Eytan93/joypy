@@ -351,10 +351,10 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     kdeline = ax.lines[0]
     xs = kdeline.get_xdata()
     ys = kdeline.get_ydata()
-    ax.vlines(mean, 0, np.interp(x_range.mean(), xs, ys), color='k',ls=':')
-    ax.vlines(median, 0, np.interp(np.median(x_range), xs, ys), color='k', ls='--')
-    ax.vlines(left, 0, np.interp(x_range.mean()-x_range.std(), xs, ys), color='k',ls='-.')
-    ax.vlines(right, 0, np.interp(x_range.mean()+x_range.std(), xs, ys), color='k',ls='-.')
+    ax.vlines(x_range.mean(), 0, np.interp(x_range.mean(), xs, ys), color='k',ls=':')
+    ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), xs, ys), color='k', ls='--')
+    ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), xs, ys), color='k',ls='-.')
+    ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), xs, ys), color='k',ls='-.')
     plt.imshow()
 ###########################################
 
