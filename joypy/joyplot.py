@@ -347,7 +347,7 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     if fill:
         kwargs["label"] = None
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
-    kde = gaussian_kde(x_range)
+    kde = gaussian_kde(v)
     y = kde(v)
     sm = kde.resample()
     ax.vlines(sm.mean(), 0, np.interp(sm.mean(), v, y), color='k',ls=':')
