@@ -352,7 +352,13 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     #ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(v.mean()-x_range.std(), x_range, y), color='k',ls='-.')
     #ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(v.mean()+x_range.std(), x_range, y), color='k',ls='-.')
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
-    
+    kde = gaussian_kde(x_range)
+    y = kde(v)
+    sm = kde.resample(size=1000)
+    ax.vlines(sm.mean(), 0, np.interp(sm.mean(), v, y), color='k',ls=':')
+    ax.vlines(np.median(sm), 0, np.interp(np.median(sm), v, y), color='k', ls='--')
+    ax.vlines(sm.mean()-sm.std(), 0, np.interp(sm.mean()-sm.std(), v, y), color='k',ls='-.')
+    ax.vlines(sm.mean()-sm.std(), 0, np.interp(sm.mean()-sm.std(), v, y), color='k',ls='-.')
 ###########################################
 
 def _joyplot(data,
@@ -459,11 +465,6 @@ def _joyplot(data,
     for i, group in enumerate(data):
 
         a = _axes[i]
-        a.vlines(x_range.mean(), 0, np.interp(x_range.mean(), x_range, y), color='k',ls=':')
-        a.vlines(np.median(x_range), 0, np.interp(np.median(x_range), x_range, y), color='k', ls='--')
-        a.vlines(x_range.mean()-x_range.std(), 0, np.interp(v.mean()-x_range.std(), x_range, y), color='k',ls='-.')
-        a.vlines(x_range.mean()-x_range.std(), 0, np.interp(v.mean()-x_range.std(), x_range, y), color='k',ls='-.')
-        a.vlines(x_range.mean()+x_range.std(), 0, np.interp(v.mean()+x_range.std(), x_range, y), color='k',ls='-.')
         group_zorder = i
         if fade:
             kwargs['alpha'] = _get_alpha(i, num_axes)
