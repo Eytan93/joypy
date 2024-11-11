@@ -351,10 +351,10 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     y = kde.evaluate(x_range)
     #height = np.interp(mean, xs, ys)
     #ax.vlines(mean, 0, height, color='crimson', ls=':')
-    ax.axvline(x=np.mean(y), ymin=0, ymax=np.interp(np.mean(y), x_range, y), color='k',ls=':')
-    ax.axvline(x=np.median(y), ymin=0, ymax=np.interp(np.median(y), x_range, y), color='k', ls='--')
-    ax.axvline(x=(np.mean(y)-np.std(y)), ymin=0, ymax=np.interp(np.mean(y)-np.std(y), x_range, y), color='k',ls='-.')
-    ax.axvline(x=(np.mean(y)+np.std(y)), ymin=0, ymax=np.interp(np.mean(y)-np.std(y), x_range, y), color='k',ls='-.')
+    ax.vlines(np.mean(y), 0, np.interp(np.mean(y), x_range, y), color='k',ls=':')
+    ax.vlines(np.median(y), 0, np.interp(np.median(y), x_range, y), color='k', ls='--')
+    ax.vlines((np.mean(y)-np.std(y)), 0, np.interp(np.mean(y)-np.std(y), x_range, y), color='k',ls='-.')
+    ax.vlines((np.mean(y)+np.std(y)), 0, np.interp(np.mean(y)-np.std(y), x_range, y), color='k',ls='-.')
 ###########################################
 
 def _joyplot(data,
