@@ -272,6 +272,9 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
         try:
             gkde = gaussian_kde(v, bw_method=bw_method)
             y = gkde.evaluate(x_range)
+            kdeline = ax.lines[0]
+            xs = kdeline.get_xdata()
+            ys = kdeline.get_ydata()
         except ValueError:
             # Handle cases where there is no data in a group.
             y = np.zeros_like(x_range)
@@ -348,13 +351,10 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
         kwargs["label"] = None
 
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
-kdeline = ax.lines[0]
-xs = kdeline.get_xdata()
-ys = kdeline.get_ydata()
-ax.vlines(x_range.mean(), 0, np.interp(x_range.mean(), xs, ys), color='k',ls=':')
-ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), xs, ys), color='k', ls='--')
-ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), xs, ys), color='k',ls='-.')
-ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), xs, ys), color='k',ls='-.')
+    ax.vlines(x_range.mean(), 0, np.interp(x_range.mean(), xs, ys), color='k',ls=':')
+    ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), xs, ys), color='k', ls='--')
+    ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), xs, ys), color='k',ls='-.')
+    ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), xs, ys), color='k',ls='-.')
 ###########################################
 
 def _joyplot(data,
