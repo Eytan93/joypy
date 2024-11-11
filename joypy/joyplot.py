@@ -349,10 +349,10 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
-    ax.vlines(y.mean(), 0, np.interp(y.mean(), v, y), color='k',ls=':')
+    ax.vlines(np.mean(y), 0, np.interp(np.mean(y), v, y), color='k',ls=':')
     ax.vlines(np.median(y), 0, np.interp(np.median(y), v, y), color='k', ls='--')
-    ax.vlines(y.mean()-y.std(), 0, np.interp(y.mean()-y.std(), v, y), color='k',ls='-.')
-    ax.vlines(y.mean()-y.std(), 0, np.interp(y.mean()-y.std(), v, y), color='k',ls='-.')
+    ax.vlines((np.mean(y)-np.std(y)), 0, np.interp(np.mean(y)-np.std(y), v, y), color='k',ls='-.')
+    ax.vlines((np.mean(y)-np.std(y)), 0, np.interp(np.mean(y)-np.std(y), v, y), color='k',ls='-.')
 ###########################################
 
 def _joyplot(data,
