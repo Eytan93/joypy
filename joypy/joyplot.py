@@ -355,7 +355,7 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     ax.vlines(np.median(x_range), 0, np.interp(np.median(x_range), xs, ys), color='k', ls='--')
     ax.vlines(x_range.mean()-x_range.std(), 0, np.interp(x_range.mean()-x_range.std(), xs, ys), color='k',ls='-.')
     ax.vlines(x_range.mean()+x_range.std(), 0, np.interp(x_range.mean()+x_range.std(), xs, ys), color='k',ls='-.')
-    plt.imshow()
+    plt.show()
 ###########################################
 
 def _joyplot(data,
