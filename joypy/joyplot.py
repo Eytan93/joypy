@@ -349,7 +349,12 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
-    print(np.interp(np.mean(v), x_range, y))
+    ax.vlines(np.mean(v), 0, np.interp(np.mean(v), x_range, y), color='k',ls=':')
+    ax.vlines(np.median(v), 0, np.interp(np.mean(v), x_range, y), color='k', ls='--')
+    ax.vlines((np.mean(v)-np.std(v)), 0, np.interp(np.mean(v)-np.std(y), x_range, y), color='k',ls='-.')
+    ax.vlines((np.mean(v)+np.std(v)), 0, np.interp(np.mean(v)-np.std(y), x_range, y), color='k',ls='-.')
+    #print(np.interp(np.mean(v), x_range, y))
+    
     #height = np.interp(mean, xs, ys)
     #ax.vlines(mean, 0, height, color='crimson', ls=':')
     #ax.vlines(np.mean(v), 0, np.interp(np.mean(v), v, y), color='k',ls=':')
