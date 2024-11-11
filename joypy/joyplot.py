@@ -350,7 +350,7 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kdeline = ax.lines[0]
     mean = x_range.mean()
-     median = np.median(x_range)
+    median = np.median(x_range)
     std = x_range.std()
     left = mean-std
     right = mean+std
