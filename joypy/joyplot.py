@@ -354,7 +354,6 @@ def plot_density(ax, x_range, v, v2, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
-    print(np.shape(v2))
     weights = 1 / v2**2
     ind = v.argsort()
     sortv = v[ind]
@@ -363,10 +362,9 @@ def plot_density(ax, x_range, v, v2, kind="kde", bw_method=None,
     normw = cumw/cumw[-1]
     interp_func = interp1d(normw, sortv)
     percv = interp_func(50.0/100.0)
-    print(percv)
     wmedian = percv[()]
     wmean = np.average(v, weights=weights)
-    wstd = np.sqrt(np.average((v - w_mean)**2, weights=weights))
+    wstd = np.sqrt(np.average((v - wmean)**2, weights=weights))
     #mean = np.mean(v)
     #median = np.median(v)
     #std = np.std(v)
