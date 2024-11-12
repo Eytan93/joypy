@@ -375,7 +375,7 @@ def plot_density(ax, x_range, v,v2, kind="kde", bw_method=None,
     
 ###########################################
 
-def _joyplot(data,
+def _joyplot(data, data2,
              grid=False,
              labels=None, sublabels=None,
              xlabels=True,
