@@ -219,8 +219,11 @@ def joyplot(data, data2, column=None, by=None, grid=False,
     elif isinstance(data, list):
         if column is not None:
             converted = [[_remove_na(g)] for g in data if _is_numeric(g) and i in column]
+            converted2 = [[_remove_na(g)] for g in data2 if _is_numeric(g) and i in column]
+
         else:
             converted = [[_remove_na(g)] for g in data if _is_numeric(g)]
+            converted2 = [[_remove_na(g)] for g in data2 if _is_numeric(g)]
         if labels and len(labels) != len(converted):
             raise ValueError("The number of labels does not match the length of the list.")
 
@@ -238,7 +241,7 @@ def joyplot(data, data2, column=None, by=None, grid=False,
         warn("At least a column/group has no numeric values.")
 
 
-    return _joyplot(converted, data2, labels=labels, sublabels=sublabels,
+    return _joyplot(converted, converted2, labels=labels, sublabels=sublabels,
                     grid=grid,
                     xlabelsize=xlabelsize, xrot=xrot, ylabelsize=ylabelsize, yrot=yrot,
                     ax=ax, figsize=figsize,
