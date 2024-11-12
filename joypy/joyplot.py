@@ -238,7 +238,7 @@ def joyplot(data, data2, column=None, by=None, grid=False,
         warn("At least a column/group has no numeric values.")
 
 
-    return _joyplot(converted, labels=labels, sublabels=sublabels,
+    return _joyplot(converted, data2, labels=labels, sublabels=sublabels,
                     grid=grid,
                     xlabelsize=xlabelsize, xrot=xrot, ylabelsize=ylabelsize, yrot=yrot,
                     ax=ax, figsize=figsize,
