@@ -349,6 +349,7 @@ def plot_density(ax, x_range, v, v2, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
+    print(type(v2))
     weights = 1 / v2**2
     sv = v.sort_values()
     sort_w = weights.loc[sv.index]
