@@ -526,7 +526,7 @@ def _joyplot(data, data2,
                 element_zorder = group_zorder + j/(num_subgroups+1)
                 element_color = _get_color(i, num_axes, j, num_subgroups)
 
-                plot_density(a, x_range,subgroup, data2,
+                plot_density(a, x_range,subgroup, subgroup,
                              fill=fill, linecolor=linecolor, label=sublabel,
                              zorder=element_zorder, color=element_color,
                              bins=bins, **kwargs)
