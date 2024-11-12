@@ -1,6 +1,8 @@
 import numpy as np
 from scipy.stats import gaussian_kde
 import scipy.stats as stats
+from scipy.interpolate import interp1d
+
 
 import warnings
 
