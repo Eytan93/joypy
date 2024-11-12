@@ -354,13 +354,15 @@ def plot_density(ax, x_range, v, v2, kind="kde", bw_method=None,
     y = kde.evaluate(x_range)
     print(np.shape(v2))
     weights = 1 / v2**2
-    sv = v.sort_values()
-    sort_w = weights.loc[sv.index]
-    cum_w = sort_w.cumsum()
-    norm_w = cum_w/cum_w.iloc[-1]
-    interp_func = interp1d(norm_w, sv)
-    p_val = interp_func(percentile / 100.0)
-    wmedian = p_val[()]
+    ind = v.argsort()
+    sortv = v[ind]
+    sortw = weights[ind]
+    cumw = np.cumsum(sortw)
+    normw = cumw/cumw[-1]
+    interp_func = interp1d(normw, sortv)
+    percv = interp_func(50.0/100.0)
+    print(percv)
+    wmedian = percv[()]
     wmean = np.average(v, weights=weights)
     wstd = np.sqrt(np.average((v - w_mean)**2, weights=weights))
     #mean = np.mean(v)
