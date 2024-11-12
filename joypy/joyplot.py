@@ -83,7 +83,7 @@ def _moving_average(a, n=3, zero_padded=False):
     else:
         return ret[n - 1:] / n
 
-def joyplot(data, column=None, by=None, grid=False,
+def joyplot(data, data2, column=None, by=None, grid=False,
             xlabelsize=None, xrot=None, ylabelsize=None, yrot=None,
             ax=None, figsize=None,
             hist=False, bins=10,
@@ -257,7 +257,7 @@ def joyplot(data, column=None, by=None, grid=False,
 
 ###########################################
 
-def plot_density(ax, x_range, v, kind="kde", bw_method=None,
+def plot_density(ax, x_range, v,v2, kind="kde", bw_method=None,
                  bins=50,
                  fill=False, linecolor=None, clip_on=True,
                  normalize=True, floc=None,**kwargs):
@@ -349,13 +349,18 @@ def plot_density(ax, x_range, v, kind="kde", bw_method=None,
     ax.plot(x_range, y, clip_on=clip_on, **kwargs)
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
-    mean = np.mean(v)
-    median = np.median(v)
-    std = np.std(v)
-    ax.vlines(mean, 0.0, np.interp(mean, x_range, y), color='k',ls=':')
-    ax.vlines(median, 0.0, np.interp(median, x_range, y), color='k', ls='--')
-    ax.vlines((mean+std), 0.0, np.interp(mean+std, x_range, y), color='k',ls='-.')
-    ax.vlines((mean-std), 0.0, np.interp(mean-std, x_range, y), color='k',ls='-.')
+    def weighted_stats(v, v2):
+    weights = 1 / v2**2
+    wmean = np.average(v, weights=weights)
+    wmedian = np.median(v, weights=weights)
+    wstd = np.sqrt(np.average((v - weighted_mean)**2, weights=weights))
+    #mean = np.mean(v)
+    #median = np.median(v)
+    #std = np.std(v)
+    ax.vlines(wmean, 0.0, np.interp(wmean, x_range, y), color='k',ls=':')
+    ax.vlines(wmedian, 0.0, np.interp(wmedian, x_range, y), color='k', ls='--')
+    ax.vlines((wmean+wstd), 0.0, np.interp(wmean+wstd, x_range, y), color='k',ls='-.')
+    ax.vlines((wmean-wstd), 0.0, np.interp(wmean-wstd, x_range, y), color='k',ls='-.')
     
     #ax.axvline(x=mean, ymin=0, ymax=kde.evaluate(mean), color='k',ls=':')
     #ax.axvline(x=median, ymin=0, ymax=kde.evaluate(median), color='k', ls='--')
