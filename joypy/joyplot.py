@@ -257,7 +257,7 @@ def joyplot(data, data2, column=None, by=None, grid=False,
 
 ###########################################
 
-def plot_density(ax, x_range, v, kind="kde", bw_method=None,
+def plot_density(ax, x_range, v, v2, kind="kde", bw_method=None,
                  bins=50,
                  fill=False, linecolor=None, clip_on=True,
                  normalize=True, floc=None,**kwargs):
@@ -522,7 +522,7 @@ def _joyplot(data, data2,
                 element_zorder = group_zorder + j/(num_subgroups+1)
                 element_color = _get_color(i, num_axes, j, num_subgroups)
 
-                plot_density(a, a, x_range, subgroup,
+                plot_density(a,v2, x_range, subgroup,
                              fill=fill, linecolor=linecolor, label=sublabel,
                              zorder=element_zorder, color=element_color,
                              bins=bins, **kwargs)
