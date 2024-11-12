@@ -257,7 +257,7 @@ def joyplot(data, data2, column=None, by=None, grid=False,
 
 ###########################################
 
-def plot_density(ax, x_range, v,v2, kind="kde", bw_method=None,
+def plot_density(ax, x_range, v, kind="kde", bw_method=None,
                  bins=50,
                  fill=False, linecolor=None, clip_on=True,
                  normalize=True, floc=None,**kwargs):
@@ -350,9 +350,15 @@ def plot_density(ax, x_range, v,v2, kind="kde", bw_method=None,
     kde = gaussian_kde(v)
     y = kde.evaluate(x_range)
     weights = 1 / v2**2
+    sv = v.sort_values()
+    sort_w = weights.loc[sv.index]
+    cum_w = sort_w.cumsum()
+    norm_w = cum_w/cum_w.iloc[-1]
+    interp_func = interp1d(norm_w, sv)
+    p_val = interp_func(percentile / 100.0)
+    wmedian = p_val[()]
     wmean = np.average(v, weights=weights)
-    wmedian = np.median(v, weights=weights)
-    wstd = np.sqrt(np.average((v - weighted_mean)**2, weights=weights))
+    wstd = np.sqrt(np.average((v - w_mean)**2, weights=weights))
     #mean = np.mean(v)
     #median = np.median(v)
     #std = np.std(v)
